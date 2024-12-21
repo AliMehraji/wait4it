@@ -1,0 +1,5 @@
+py-consul
+psycopg
+psycopg-binary
+redis
+pika

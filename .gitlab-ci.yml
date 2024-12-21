@@ -1,0 +1,20 @@
+stages:
+  - build
+
+build-image:
+  # Official docker image.
+  image: docker:26.1
+  stage: build
+  services:
+    - docker:26.1-dind
+  before_script:
+    - docker login -u "$NX_REGISTRY_USER" -p "$NX_REGISTRY_PASSWORD" $NX_REGISTRY
+    - docker pull "$NX_REGISTRY/$CI_PROJECT_PATH" || true
+  script:
+    - docker build --cache-from "$NX_REGISTRY/$CI_PROJECT_PATH:latest" --tag "$NX_REGISTRY/$CI_PROJECT_PATH:latest" --tag "$NX_REGISTRY/$CI_PROJECT_PATH:latest-$CI_COMMIT_SHORT_SHA" .
+    - docker push "$NX_REGISTRY/$CI_PROJECT_PATH:latest"
+    - docker push "$NX_REGISTRY/$CI_PROJECT_PATH:latest-$CI_COMMIT_SHORT_SHA"
+  only:
+    - main
+  tags:
+    - "Gitlab-Docker"

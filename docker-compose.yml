@@ -1,0 +1,15 @@
+---
+services:
+  InitContainer:
+    image: k8s-initcontainer:latest
+    environment:
+      - CONSUL_HOST=
+      - CONSUL_PORT=
+      - CONSUL_PREFIX=
+      - CONSUL_CONNECTION_CHECK_KEY=
+      - CONSUL_MANDATORY_KEYS=
+      - CONSUL_OPTIONAL_KEYS=
+    restart: on-failure
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+...
