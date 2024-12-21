@@ -55,12 +55,14 @@ def get_consul_configuration():
         - `CONSUL_PREFIX`
         - `CONSUL_MANDATORY_KEYS`
         - `CONSUL_OPTIONAL_KEYS`
+        - `CONSUL_CONNECTION_CHECK_KEY`
     
     Returns:
         tuple: A tuple containing:
         - `consul_prefix` (str): The prefix used for Consul keys.
         - `consul_mandatory_keys` (list): A list of mandatory Consul keys.
         - `consul_optional_keys` (list): A list of optional Consul keys.
+        - consul_connection_check_key (str): An Arbitrary Key has to be set in Consul, to check the Consul its own connectivity.
 
     Raises:
         `EnvironmentError` If below environment variables are now set
