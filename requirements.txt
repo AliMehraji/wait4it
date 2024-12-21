@@ -1,5 +1,5 @@
 py-consul
 psycopg
-psycopg-binary
+psycopg[binary]
 redis
 pika
