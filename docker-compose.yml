@@ -1,7 +1,7 @@
 ---
 services:
   InitContainer:
-    image: k8s-initcontainer:latest
+    image: wait4it:latest
     environment:
       - CONSUL_HOST=
       - CONSUL_PORT=
