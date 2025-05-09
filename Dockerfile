@@ -1,14 +1,15 @@
 # Pin the Python base image for all stages and
-# install all shared dependencies.
 FROM python:3.12-slim AS base
 
+# install all shared dependencies.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Tweak Python to run better in Docker
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=on
+    PIP_DISABLE_PIP_VERSION_CHECK=on 
+    # PIP_INDEX_URL
 
 # Build stage: dev & build dependencies can be installed here
 FROM base AS build
@@ -27,7 +28,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r requirements.txt
+    pip --timeout 100  install --no-cache-dir -r requirements.txt
 
 # Runtime stage: copy only the virtual environment.
 FROM base AS runtime
