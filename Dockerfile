@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Tweak Python to run better in Docker
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=on 
+    PIP_DISABLE_PIP_VERSION_CHECK=on
     # PIP_INDEX_URL
 
 # Build stage: dev & build dependencies can be installed here
